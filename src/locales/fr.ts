@@ -28,7 +28,7 @@ const unitToWordPlural: UnitRecord<string> = {
   year: 'années'
 };
 
-const lc: Locale = 
+const lc: Locale =
 {
   weekStartsOn: 1,
 
@@ -68,13 +68,13 @@ const lc: Locale =
   patternLastDay: () => `Le dernier jour du mois`,
   patternLastDayOfMonth: (day) => `Le dernier jour de ${lc.months[0][day.month]}`,
   patternLastWeekday: (day) => `Le dernier ${lc.weekdays[0][day.day]} d’${lc.months[0][day.month]}`,
-  patternCustom: () => `Douane...`,
+  patternCustom: () => `Personnaliser...`,
 
   scheduleStartingOn: (start) => `Commençant le ${start.dayOfMonth} ${lc.months[0][start.month]} ${start.year}`,
   scheduleEndingOn: (end) => `et finissant le ${end.dayOfMonth} ${lc.months[0][end.month]} ${end.year}`,
   scheduleEndsOn: (end) => `Jusqu'au ${end.dayOfMonth} ${lc.months[0][end.month]} ${end.year}`,
-  scheduleThing: (thing, start) => start 
-    ? 'L’' + thing + ' va se produire' 
+  scheduleThing: (thing, start) => start
+    ? 'L’' + thing + ' va se produire'
     : ' l’' + thing + ' va se produire',
 
   scheduleAtTimes: ' à ',

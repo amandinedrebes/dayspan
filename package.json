@@ -1,16 +1,13 @@
 {
-  "name": "dayspan",
-  "version": "1.1.0",
+  "name": "custom-dayspan",
+  "version": "1.1.2",
   "description": "A date & schedule library to use for advanced calendars in TypeScript and JS",
   "main": "dist/dayspan.js",
   "typings": "typings/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/ClickerMonkey/dayspan"
+    "url": "https://www.github.com/amandinedrebes/dayspan"
   },
-  "authors": [
-    "Philip Diffenderfer <pdiffenderfer@gmail.com>"
-  ],
   "license": "MIT",
   "engines": {
     "node": ">=6.9"
