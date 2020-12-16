@@ -30,7 +30,7 @@ const unitToWordPlural: UnitRecord<string> = {
 
 const lc: Locale =
 {
-  weekStartsOn: 1,
+  weekStartsOn: 0, //TODO revert it but it cause an issue in dayspan-vuetify
 
   firstWeekContainsDate: 4,
 

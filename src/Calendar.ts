@@ -355,7 +355,7 @@ export class Calendar<T, M>
       const type: Units      = fn.coalesce( input.type, this.type );
       const today: Day       = Day.today();
       let around: DayInput   = fn.coalesce( input.around, this.days[ Math.floor( (this.days.length - 1) * focus ) ] );
-      
+
 
       if (!around || (prefer && this.span.matchesDay(today)))
       {
