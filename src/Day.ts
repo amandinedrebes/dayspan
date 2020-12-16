@@ -29,7 +29,7 @@ export type DayInput = number | string | Day | number[] | object | true;
 export type DayProperty = keyof DayFrequency;
 
 /**
- * The properties and their types that can be used in a schedule to define 
+ * The properties and their types that can be used in a schedule to define
  * repeatable events.
  */
 export interface DayFrequency
@@ -62,8 +62,8 @@ export interface DayFrequency
 
 /**
  * A class which represents a Date with a few added features.
- * 
- * - Has extra properties around days and weeks of the year and weeks of the 
+ *
+ * - Has extra properties around days and weeks of the year and weeks of the
  *    year and month.
  * - Inherits global locale and responds to changes.
  * - Can have a custom locale for any given instance.
@@ -78,7 +78,7 @@ export class Day implements DayFrequency
 {
 
   /**
-   * The date that initialize the day. This should not be modified, and if it 
+   * The date that initialize the day. This should not be modified, and if it
    * is it will result in unpredictable and incorrect behavior.
    */
   public readonly date: Date;
@@ -129,7 +129,7 @@ export class Day implements DayFrequency
   public readonly dayOfMonth: number;
 
   /**
-   * The reference to the global locale or the locale specified on this 
+   * The reference to the global locale or the locale specified on this
    * instance. Use [[Day.getLocale]] to get the proper locale for a Day.
    */
   private _locale: Ref<Locale>;
@@ -156,10 +156,10 @@ export class Day implements DayFrequency
   }
 
   /**
-   * The quarter of the year this day is in, starting at 0 for January 
+   * The quarter of the year this day is in, starting at 0 for January
    * through March.
    */
-  public get quarter(): number 
+  public get quarter(): number
   {
     return this.getValue('_quarter', getQuarter);
   }
@@ -169,7 +169,7 @@ export class Day implements DayFrequency
   /**
    * The day of the year, starting at 1 for the 1st of January.
    */
-  public get dayOfYear(): number 
+  public get dayOfYear(): number
   {
     return this.getValue('_dayOfYear', getDayOfYear);
   }
@@ -180,7 +180,7 @@ export class Day implements DayFrequency
    * The day of the week relative to the first day of the week specified by
    * [[Locale.weekStartsOn]]. So if the week starts on Monday, then this will
    * be 0 for Monday, 1 for Tuesday, etc.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get dayOfWeek(): number
@@ -191,7 +191,7 @@ export class Day implements DayFrequency
   public _dayOfWeek: number = null;
 
   /**
-   * The last day of the month, starting at 1 for the last day, 2 for the 2nd 
+   * The last day of the month, starting at 1 for the last day, 2 for the 2nd
    * to last, etc.
    */
   public get lastDayOfMonth(): number
@@ -203,7 +203,7 @@ export class Day implements DayFrequency
 
   /**
    * The week of the year. The first week of the year (1) contains Jan 1st.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get week(): number
@@ -214,10 +214,10 @@ export class Day implements DayFrequency
   public _week: number = null;
 
   /**
-   * The week of the year. The first week of the year (1) is the first week 
-   * which has the date [[Locale.firstWeekContainsDate]]. If there is a week 
+   * The week of the year. The first week of the year (1) is the first week
+   * which has the date [[Locale.firstWeekContainsDate]]. If there is a week
    * before that it will be 0. Frequently referred to as the ISO week.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get weekOfYear(): number
@@ -228,8 +228,8 @@ export class Day implements DayFrequency
   public _weekOfYear: number = null;
 
   /**
-   * The weekspan of the year, starting at 0 representing January 1st to the 7th. 
-   * Weekspans allow you to create schedules for things like "the first 
+   * The weekspan of the year, starting at 0 representing January 1st to the 7th.
+   * Weekspans allow you to create schedules for things like "the first
    * saturday of the year".
    */
   public get weekspanOfYear(): number
@@ -240,9 +240,9 @@ export class Day implements DayFrequency
   public _weekspanOfYear: number = null;
 
   /**
-   * The full week of the year, starting at 0 for a partial week (if one exists) 
+   * The full week of the year, starting at 0 for a partial week (if one exists)
    * and 1 for the first full week.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get fullWeekOfYear(): number
@@ -253,7 +253,7 @@ export class Day implements DayFrequency
   public _fullWeekOfYear: number = null;
 
   /**
-   * The last weekspan of the year, starting at 0 representing December 31st to 
+   * The last weekspan of the year, starting at 0 representing December 31st to
    * December 25th. Weekspans allow you to create schedules for things like
    * "the last saturday of the year".
    */
@@ -265,9 +265,9 @@ export class Day implements DayFrequency
   public _lastWeekspanOfYear: number = null;
 
   /**
-   * The last full week of the year, starting at 0 for the last week ending 
+   * The last full week of the year, starting at 0 for the last week ending
    * before Thursday and 1 for the last week with a Thursday.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get lastFullWeekOfYear(): number
@@ -279,10 +279,10 @@ export class Day implements DayFrequency
 
 
   /**
-   * The week of the month. The first week of the month (1) is the first week 
-   * which has the date [[Locale.firstWeekContainsDate]]. If there is a week 
+   * The week of the month. The first week of the month (1) is the first week
+   * which has the date [[Locale.firstWeekContainsDate]]. If there is a week
    * before that it will be 0.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get weekOfMonth(): number
@@ -294,7 +294,7 @@ export class Day implements DayFrequency
 
   /**
    * The weekspan of the month, starting at 0 representing the 1st to the 7th.
-   * Weekspans allow you to create schedules for things like "the first 
+   * Weekspans allow you to create schedules for things like "the first
    * saturday of the month".
    */
   public get weekspanOfMonth(): number
@@ -305,9 +305,9 @@ export class Day implements DayFrequency
   public _weekspanOfMonth: number = null;
 
   /**
-   * The full week of the month, starting at 0 for a partial week (if one exists) 
+   * The full week of the month, starting at 0 for a partial week (if one exists)
    * and 1 for the first full week.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get fullWeekOfMonth(): number
@@ -318,8 +318,8 @@ export class Day implements DayFrequency
   public _fullWeekOfMonth: number = null;
 
   /**
-   * The last weekspan of the month, starting at 0 representing 31st to 25th 
-   * for a month with 31 days. Weekspans allow you to create schedules for 
+   * The last weekspan of the month, starting at 0 representing 31st to 25th
+   * for a month with 31 days. Weekspans allow you to create schedules for
    * things like "the last saturday of the month".
    */
   public get lastWeekspanOfMonth(): number
@@ -330,9 +330,9 @@ export class Day implements DayFrequency
   public _lastWeekspanOfMonth: number = null;
 
   /**
-   * The last full week of the month, starting at 0 for the last week ending 
+   * The last full week of the month, starting at 0 for the last week ending
    * before Thursday and 1 for the last week with a Thursday.
-   * 
+   *
    * This is dependent on the locale of the instance (or global locale).
    */
   public get lastFullWeekOfMonth(): number
@@ -394,12 +394,12 @@ export class Day implements DayFrequency
 
 
   /**
-   * Returns the locale based value. First it checks to see if the global 
-   * locale changed and updates accordingly. If the value is not cached the 
+   * Returns the locale based value. First it checks to see if the global
+   * locale changed and updates accordingly. If the value is not cached the
    * value is recalculated.
-   * 
+   *
    * @param property The property on the Day.
-   * @param compute The function which takes the Day and calculates and stores 
+   * @param compute The function which takes the Day and calculates and stores
    *    the value of the requested property.
    */
   private getLocaleValue<K extends keyof Day> (property: K, compute: (date: Date, options: LocaleOptions) => Day[K]): Day[K]
@@ -415,11 +415,11 @@ export class Day implements DayFrequency
   }
 
   /**
-   * Returns the value of the property If it's not cached, otherwise the value 
-   * is computed and stored on this Day instance.. 
-   * 
+   * Returns the value of the property If it's not cached, otherwise the value
+   * is computed and stored on this Day instance..
+   *
    * @param property The property on the Day.
-   * @param compute The function which takes the Day and calculates and stores 
+   * @param compute The function which takes the Day and calculates and stores
    *    the value of the requested property.
    */
   private getValue<K extends keyof Day> (property: K, compute: (date: Date) => Day[K]): Day[K]
@@ -433,7 +433,7 @@ export class Day implements DayFrequency
   }
 
   /**
-   * Checks to see if the global locale has changed, and if it has it invalides 
+   * Checks to see if the global locale has changed, and if it has it invalides
    * the locale-based properties so next time they're accessed they are cleaned up.
    */
   private checkForUpdate (): void
@@ -448,7 +448,7 @@ export class Day implements DayFrequency
 
   /**
    * Sets the locale for this Day and returns this.
-   * 
+   *
    * @param key The code to the locale to apply.
    */
   public setLocale (key: string): this
@@ -466,7 +466,7 @@ export class Day implements DayFrequency
   }
 
   /**
-   * Returns the current locale of the day instance. 
+   * Returns the current locale of the day instance.
    */
   public getLocale (): Locale
   {
@@ -549,16 +549,16 @@ export class Day implements DayFrequency
   /**
    * Determines whether this week and the given day lie on the same year.
    */
-  public sameHour (day: Day): boolean 
+  public sameHour (day: Day): boolean
   {
-    return this.dayIdentifier === day.dayIdentifier && 
+    return this.dayIdentifier === day.dayIdentifier &&
       this.hour === day.hour;
   }
 
   /**
-   * Determines whether 
+   * Determines whether
    */
-  public sameMinute (day: Day): boolean 
+  public sameMinute (day: Day): boolean
   {
     return this.timeIdentifier === day.timeIdentifier;
   }
@@ -566,20 +566,20 @@ export class Day implements DayFrequency
   /**
    *
    */
-  public sameTime (time: Time): boolean 
+  public sameTime (time: Time): boolean
   {
-    return this.hour === time.hour && 
-      this.minute === time.minute && 
-      this.seconds === time.second && 
+    return this.hour === time.hour &&
+      this.minute === time.minute &&
+      this.seconds === time.second &&
       this.millis === time.millisecond;
   }
 
   // Comparison
 
   /**
-   * 
-   * @param day 
-   * @param precision 
+   *
+   * @param day
+   * @param precision
    */
   public compare (day: Day, precision?: Unit): number
   {
@@ -589,7 +589,7 @@ export class Day implements DayFrequency
   /**
    *
    */
-  public isBefore (day: Day, precision?: Unit): boolean 
+  public isBefore (day: Day, precision?: Unit): boolean
   {
     return compare(this.date, day.date, precision) < 0;
   }
@@ -597,7 +597,7 @@ export class Day implements DayFrequency
   /**
    *
    */
-  public isSameOrBefore (day: Day, precision?: Unit): boolean 
+  public isSameOrBefore (day: Day, precision?: Unit): boolean
   {
     return compare(this.date, day.date, precision) <= 0;
   }
@@ -605,7 +605,7 @@ export class Day implements DayFrequency
   /**
    *
    */
-  public isAfter(day: Day, precision?: Unit): boolean 
+  public isAfter(day: Day, precision?: Unit): boolean
   {
     return compare(this.date, day.date, precision) > 0;
   }
@@ -613,7 +613,7 @@ export class Day implements DayFrequency
   /**
    *
    */
-  public isSameOrAfter(day: Day, precision?: Unit): boolean 
+  public isSameOrAfter(day: Day, precision?: Unit): boolean
   {
     return compare(this.date, day.date, precision) >= 0;
   }
@@ -623,7 +623,7 @@ export class Day implements DayFrequency
    * @param day
    * @returns
    */
-  public max(day: Day): Day 
+  public max(day: Day): Day
   {
     return compare(this.date, day.date) > 0 ? this : day;
   }
@@ -633,7 +633,7 @@ export class Day implements DayFrequency
    * @param day
    * @returns
    */
-  public min(day: Day): Day 
+  public min(day: Day): Day
   {
     return compare(this.date, day.date) < 0 ? this : day;
   }
@@ -641,7 +641,7 @@ export class Day implements DayFrequency
   // Between
 
   /**
-   * 
+   *
    * @param day
    * @param unit
    * @param op
@@ -653,51 +653,51 @@ export class Day implements DayFrequency
     return operate( diff[unit](this.date, day.date), op, absolute );
   }
 
-  public millisBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public millisBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'millis', op, absolute);
   }
 
-  public secondsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public secondsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'second', op, absolute);
   }
 
-  public minutesBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public minutesBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'minute', op, absolute);
   }
 
-  public hoursBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public hoursBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'hour', op, absolute);
   }
 
-  public daysBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public daysBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'day', op, absolute);
   }
 
-  public weeksBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public weeksBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'week', op, absolute);
   }
 
-  public monthsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public monthsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'month', op, absolute);
   }
 
-  public yearsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number 
+  public yearsBetween(day: Day, op: Op = Op.DOWN, absolute: boolean = true): number
   {
     return this.between(day, 'year', op, absolute);
   }
 
-  public isBetween(start: Day, end: Day, inclusive: boolean = true, precision?: Unit): boolean 
+  public isBetween(start: Day, end: Day, inclusive: boolean = true, precision?: Unit): boolean
   {
     const before = this.isBefore(start);
 
-    if (before) 
+    if (before)
     {
       return false;
     }
@@ -706,7 +706,7 @@ export class Day implements DayFrequency
       ? this.isSameOrAfter(end)
       : this.isAfter(end);
 
-    if (after) 
+    if (after)
     {
       return false;
     }
@@ -714,7 +714,7 @@ export class Day implements DayFrequency
     return true;
   }
 
-  public mutate(mutator: (date: Date) => any): Day 
+  public mutate(mutator: (date: Date) => any): Day
   {
     const d = this.toDate();
 
@@ -725,102 +725,102 @@ export class Day implements DayFrequency
       : new Day(d);
   }
 
-  public add(unit: Unit, amount: number = 1): Day 
+  public add(unit: Unit, amount: number = 1): Day
   {
     return this.mutate(d => add[unit](d, amount));
   }
 
-  public relative(millis: number): Day 
+  public relative(millis: number): Day
   {
     return this.add('millis', millis);
   }
 
   // Days
 
-  public prev(days: number = 1): Day 
+  public prev(days: number = 1): Day
   {
     return this.add('day', -days);
   }
 
-  public next(days: number = 1): Day 
+  public next(days: number = 1): Day
   {
     return this.add('day', days);
   }
 
-  public withDayOfMonth(day: number): Day 
+  public withDayOfMonth(day: number): Day
   {
     return this.mutate(d => d.setDate(day));
   }
 
-  public withDay(day: number): Day 
+  public withDay(day: number): Day
   {
     return this.add('day', day - this.date.getDay());
   }
 
-  public withDayOfWeek(dayOfWeek: number): Day 
+  public withDayOfWeek(dayOfWeek: number): Day
   {
     return this.add('day', dayOfWeek - getDayOfWeek(this.date, this.getLocale()));
   }
 
-  public withDayOfYear(dayOfYear: number): Day 
+  public withDayOfYear(dayOfYear: number): Day
   {
     return this.add('day', dayOfYear - getDayOfYear(this.date));
   }
 
   // Month
 
-  public withMonth(month: number): Day 
+  public withMonth(month: number): Day
   {
     return this.mutate(d => d.setMonth(month));
   }
 
   // Week Of Year
 
-  protected withWeek(week: number, relativeWeek: number): Day 
+  protected withWeek(week: number, relativeWeek: number): Day
   {
     return this.add('day', (week - relativeWeek) * Constants.DAYS_IN_WEEK);
   }
 
-  public withWeekOfYear(week: number): Day 
+  public withWeekOfYear(week: number): Day
   {
     return this.withWeek(week, this.weekOfYear);
   }
 
-  public withFullWeekOfYear(week: number): Day 
+  public withFullWeekOfYear(week: number): Day
   {
     return this.withWeek(week, this.fullWeekOfYear);
   }
 
-  public withWeekspanOfYear(week: number): Day 
+  public withWeekspanOfYear(week: number): Day
   {
     return this.withWeek(week, this.weekspanOfYear);
   }
 
-  public withWeekOfMonth(week: number): Day 
+  public withWeekOfMonth(week: number): Day
   {
     return this.withWeek(week, this.weekOfMonth);
   }
 
-  public withWeekspanOfMonth(week: number): Day 
+  public withWeekspanOfMonth(week: number): Day
   {
     return this.withWeek(week, this.weekspanOfMonth);
   }
 
-  public withFullWeekOfMonth(week: number): Day 
+  public withFullWeekOfMonth(week: number): Day
   {
     return this.withWeek(week, this.fullWeekOfMonth);
   }
 
   // Year
 
-  public withYear(year: number): Day 
+  public withYear(year: number): Day
   {
     return this.mutate(d => d.setFullYear(year));
   }
 
   // Hour
 
-  public withHour(hour: number): Day 
+  public withHour(hour: number): Day
   {
     return this.mutate(d => d.setHours(hour));
   }
@@ -831,17 +831,17 @@ export class Day implements DayFrequency
       hour: number = Constants.HOUR_MIN,
       minute: number = Constants.MINUTE_MIN,
       second: number = Constants.SECOND_MIN,
-      millisecond: number = Constants.MILLIS_MIN): Day 
+      millisecond: number = Constants.MILLIS_MIN): Day
   {
     return this.mutate(d => d.setHours(hour, minute, second, millisecond));
   }
 
-  public withTime(time: Time): Day 
+  public withTime(time: Time): Day
   {
     return this.withTimes(time.hour, time.minute, time.second, time.millisecond);
   }
 
-  public asTime(): Time 
+  public asTime(): Time
   {
     return new Time(this.hour, this.minute, this.seconds, this.millis);
   }
@@ -872,72 +872,72 @@ export class Day implements DayFrequency
 
   // Days In X
 
-  public daysInMonth(): number 
+  public daysInMonth(): number
   {
     return getDaysInMonth(this.date);
   }
 
-  public daysInYear(): number 
+  public daysInYear(): number
   {
     return getDaysInYear(this.date);
   }
 
-  public weeksInYear(): number 
+  public weeksInYear(): number
   {
     return getWeeksInYear(this.date);
   }
 
   // Display
 
-  public format(format: string, cache: boolean = false): string 
+  public format(format: string, cache: boolean = false): string
   {
     return DayFormat.format(format, [this, this.getLocale()], cache);
   }
 
-  public utc(keepLocalTime?: boolean): Day 
+  public utc(keepLocalTime?: boolean): Day
   {
     // TODO
     return this;
   }
 
-  public toDate(): Date 
+  public toDate(): Date
   {
     return new Date(this.date.getTime());
   }
 
-  public toArray(): number[] 
+  public toArray(): number[]
   {
     return [this.year, this.month, this.dayOfMonth, this.hour, this.minute, this.seconds, this.millis];
   }
 
-  public toJSON(): string 
+  public toJSON(): string
   {
     return this.date.toJSON();
   }
 
-  public toISOString(keepOffset: boolean = false): string 
+  public toISOString(keepOffset: boolean = false): string
   {
     return this.date.toISOString(); // TODO
   }
 
-  public toObject(): object 
+  public toObject(): object
   {
     throw new Error('toObject is no longer supported');
   }
 
-  public toString(): string 
+  public toString(): string
   {
     return this.date.toString();
   }
 
   // State
 
-  public isDST(): boolean 
+  public isDST(): boolean
   {
     return isDaylightSavingTime(this.date);
   }
 
-  public isLeapYear(): boolean 
+  public isLeapYear(): boolean
   {
     return isLeapYear(this.date);
   }
@@ -947,19 +947,31 @@ export class Day implements DayFrequency
     return getDateOffset(this.date);
   }
 
+ // Hours
+
+  public prevHour(hours: number = 1): Day
+  {
+    return this.add('hour', -hours);
+  }
+
+  public nextHour(hours: number = 1): Day
+  {
+    return this.add('hour', hours);
+  }
+
   // Instances
 
-  public static now(): Day 
+  public static now(): Day
   {
     return new Day(new Date());
   }
 
-  public static today(): Day 
+  public static today(): Day
   {
     return this.now().startOf('day');
   }
 
-  public static tomorrow(): Day 
+  public static tomorrow(): Day
   {
     return this.today().next();
   }
@@ -969,37 +981,37 @@ export class Day implements DayFrequency
     return isFinite(date.getTime()) ? new Day(date) : null;
   }
 
-  public static unix(millis: number): Day 
+  public static unix(millis: number): Day
   {
     return this.fromDate(new Date(millis));
   }
 
-  public static unixSeconds(seconds: number): Day 
+  public static unixSeconds(seconds: number): Day
   {
     return this.fromDate(new Date(seconds * Constants.MILLIS_IN_SECOND));
   }
 
-  public static parse(input: DayInput): Day 
+  public static parse(input: DayInput): Day
   {
     return Parse.day(input);
   }
 
-  public static fromString(input: string): Day 
+  public static fromString(input: string): Day
   {
     return this.fromDate(new Date(input));
   }
 
-  public static fromFormat(input: string, formats: string | string[]): Day 
+  public static fromFormat(input: string, formats: string | string[]): Day
   {
     throw new Error('fromFormat is no longer supported');
   }
 
-  public static fromObject(input: object): Day 
+  public static fromObject(input: object): Day
   {
     throw new Error('fromObject is no longer supported');
   }
 
-  public static fromArray(input: number[]): Day 
+  public static fromArray(input: number[]): Day
   {
     const YEAR_INDEX = 0;
     const MONTH_INDEX = 1;
@@ -1010,17 +1022,17 @@ export class Day implements DayFrequency
     const MILLIS_INDEX = 6;
 
     return this.fromDate(new Date(
-      input[YEAR_INDEX], 
-      input[MONTH_INDEX], 
-      fn.coalesce(input[DATE_INDEX], Constants.DAY_MIN), 
-      fn.coalesce(input[HOUR_INDEX], Constants.HOUR_MIN), 
-      fn.coalesce(input[MINUTE_INDEX], Constants.MINUTE_MIN), 
-      fn.coalesce(input[SECOND_INDEX], Constants.SECOND_MIN), 
+      input[YEAR_INDEX],
+      input[MONTH_INDEX],
+      fn.coalesce(input[DATE_INDEX], Constants.DAY_MIN),
+      fn.coalesce(input[HOUR_INDEX], Constants.HOUR_MIN),
+      fn.coalesce(input[MINUTE_INDEX], Constants.MINUTE_MIN),
+      fn.coalesce(input[SECOND_INDEX], Constants.SECOND_MIN),
       fn.coalesce(input[MILLIS_INDEX], Constants.MILLIS_MIN)
     ));
   }
 
-  public static fromDayIdentifier(id: number): Day 
+  public static fromDayIdentifier(id: number): Day
   {
     const DATE_MASK = 100;
     const MONTH_MASK = 100;
