@@ -227,21 +227,21 @@ export class Schedule<M>
   private _maxOccurrences: number;
 
   /**
-   * The maximum number of occurrences allowed in the Schedule. 
-   * [[Schedule.start]] is required and [[Schedule.end]] is ignored and 
-   * overwritten. This is an expensive check and should be avoided if 
+   * The maximum number of occurrences allowed in the Schedule.
+   * [[Schedule.start]] is required and [[Schedule.end]] is ignored and
+   * overwritten. This is an expensive check and should be avoided if
    * possible. If this value is less than 1 it is ignored.
    */
-  public get maxOccurrences(): number 
-  { 
+  public get maxOccurrences(): number
+  {
     return this._maxOccurrences;
   }
 
-  public set maxOccurrences(value: number) 
-  { 
+  public set maxOccurrences(value: number)
+  {
     this._maxOccurrences = value;
 
-    if (this.checks) 
+    if (this.checks)
     {
       this.updateEnd();
     }
@@ -491,7 +491,7 @@ export class Schedule<M>
       this.month,
       this.day,
       this.quarter,
-      this.week, 
+      this.week,
       this.weekOfYear,
       this.fullWeekOfYear,
       this.weekspanOfYear,
@@ -537,18 +537,18 @@ export class Schedule<M>
   }
 
   /**
-   * Estimates the maximum number of `prop` from the start date that events 
-   * could be happening. If the start date is not specified -1 will be 
+   * Estimates the maximum number of `prop` from the start date that events
+   * could be happening. If the start date is not specified -1 will be
    * returned representing potentially infinite `prop`s. If specific `prop`s
    * are specified the difference between the maximum `prop` and the start `prop`
-   * will be returned. After that if [[Schedule.maxOccurrences]] is not 
+   * will be returned. After that if [[Schedule.maxOccurrences]] is not
    * specified -1 will be returned unless the end date is specified. In that
    * case the `prop`s between the start and end are returned. Otherwise
    * if events occur every X `prop`s then that calculation is used taking into
    * account [[Schedule.maxOccurrences]]. Finally no year rule is specified
    * so worst case is assumed, [[Schedule.maxOccurrences]].
-   * 
-   * The returned value is always rounded up, so if the first and last 
+   *
+   * The returned value is always rounded up, so if the first and last
    * occurrence happens the same `prop` 1 will be returned.
    */
   public getMaximum (prop: DayProperty): number
@@ -642,11 +642,11 @@ export class Schedule<M>
 
   /**
    * Attempts to calculate the entire range of the schedule taking into account
-   * any start date, end date, the included and excluded dates, and also even 
-   * if the start and end date aren't specified, it checks to see if this is a 
-   * single event schedule. If the start of the result is not defined, that 
+   * any start date, end date, the included and excluded dates, and also even
+   * if the start and end date aren't specified, it checks to see if this is a
+   * single event schedule. If the start of the result is not defined, that
    * means this schedule has occurred since the beginning of time. If the end
-   * of the result is not defined, that means the schedule will occurr until 
+   * of the result is not defined, that means the schedule will occurr until
    * the end of time.
    */
   public getRange(useInclude: boolean = true): Partial<DaySpan>
@@ -657,7 +657,7 @@ export class Schedule<M>
 
     if (useInclude)
     {
-      this.include.spans().each(({span}) => 
+      this.include.spans().each(({span}) =>
       {
         if (!this.isExcluded(span.start, hasTimes))
         {
@@ -677,10 +677,10 @@ export class Schedule<M>
   }
 
   /**
-   * Returns an iterator for all occurrences in this schedule. If a finite 
-   * list of occurrences is not possible to generate, an empty iterator will 
+   * Returns an iterator for all occurrences in this schedule. If a finite
+   * list of occurrences is not possible to generate, an empty iterator will
    * be returned. A finite set of occurrences can be determine when a start
-   * and end date are specified. 
+   * and end date are specified.
    */
   public getOccurrences(): Iterate<DaySpan, IdentifierInput, Schedule<M> | ScheduleModifier<M>>
   {
@@ -1381,7 +1381,7 @@ export class Schedule<M>
     for (let i = 0; i < this.times.length && !found; i++)
     {
       found = fromTime.matches( this.times[ i ] )
-      
+
       if (found)
       {
         this.times.splice( i, 1, toTime );
@@ -1823,12 +1823,12 @@ export class Schedule<M>
    * @param timeFormat The time format to use when returning the times as strings.
    * @param alwaysDuration If the duration values (`duration` and
    *    `durationUnit`) should always be returned in the input.
-   * @param alwaysReturnEnd If end should be in the input even if 
+   * @param alwaysReturnEnd If end should be in the input even if
    *    maxOccurrences is specified on the schedule.
    * @returns The input that describes this schedule.
    * @see [[Time.format]]
    */
-  public toInput(returnDays: boolean = false, returnTimes: boolean = false, timeFormat: string = '', alwaysDuration: boolean = false, alwaysReturnEnd: boolean = false): ScheduleInput<M>
+  public toInput(returnDays: boolean = false, returnTimes: boolean = false, timeFormat: string = '', alwaysDuration: boolean = true, alwaysReturnEnd: boolean = false): ScheduleInput<M>
   {
     const defaultUnit: string = Constants.DURATION_DEFAULT_UNIT( this.isFullDay() );
     const exclusions: IdentifierInput[] = this.exclude.identifiers(v => v).array();
